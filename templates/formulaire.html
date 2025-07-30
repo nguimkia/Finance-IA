@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Prédiction de Crédit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px auto;
+            max-width: 600px;
+            background: #f0f4f8;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        select, input[type="number"], input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1em;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            font-size: 1.1em;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .resultat {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            background-color: #e2e8f0;
+            color: #1a202c;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prédiction de Crédit</h1>
+    <form method="post" action="/">
+        <label for="age">Âge :</label>
+        <input type="number" id="age" name="age" min="18" max="100" required />
+
+        <label for="sexe">Sexe :</label>
+        <select id="sexe" name="sexe" required>
+            <option value="">-- Choisir --</option>
+            <option value="Homme">Homme</option>
+            <option value="Femme">Femme</option>
+        </select>
+
+        <label for="revenu_mensuel">Revenu Mensuel :</label>
+        <input type="number" id="revenu_mensuel" name="revenu_mensuel" min="0" step="any" required />
+
+        <label for="profession">Profession :</label>
+        <select id="profession" name="profession" required>
+            <option value="">-- Choisir --</option>
+            <option value="Salarié">Salarié</option>
+            <option value="Commerçant">Commerçant</option>
+            <option value="Fonctionnaire">Fonctionnaire</option>
+            <option value="Autre">Autre</option>
+        </select>
+
+        <label for="nb_enfants">Nombre d'enfants :</label>
+        <input type="number" id="nb_enfants" name="nb_enfants" min="0" max="20" required />
+
+        <label for="montant_pret_demande">Montant du prêt demandé :</label>
+        <input type="number" id="montant_pret_demande" name="montant_pret_demande" min="0" step="any" required />
+
+        <label for="duree_pret_mois">Durée du prêt (en mois) :</label>
+        <input type="number" id="duree_pret_mois" name="duree_pret_mois" min="1" max="360" required />
+
+        <label for="historique_remboursement">Historique de remboursement :</label>
+        <select id="historique_remboursement" name="historique_remboursement" required>
+            <option value="">-- Choisir --</option>
+            <option value="Bon">Bon</option>
+            <option value="Moyen">Moyen</option>
+            <option value="Mauvais">Mauvais</option>
+        </select>
+
+        <label for="zone">Zone :</label>
+        <select id="zone" name="zone" required>
+            <option value="">-- Choisir --</option>
+            <option value="Urbaine">Urbaine</option>
+            <option value="Rurale">Rurale</option>
+        </select>
+
+        <button type="submit">Prédire</button>
+    </form>
+
+    {% if prediction is not none %}
+    <div class="resultat">
+        Résultat : {{ prediction }}
+    </div>
+    {% endif %}
+</body>
+</html>
